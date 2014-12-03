@@ -18,21 +18,21 @@ private:
 class LinkedList
 {
 public:
-	LinkedList();
-	~LinkedList();
-	void addNodeEnd(int value);
-	void addNodeBegin(int value);
-	void insertBefore(int index, int value);
-	int size() const;
-	void printList() const;
-	int at(int index) const;
-	int popHead();
-	void walk();
-	int popTail();
-	int popAt(int index);
-	int getSize() const;
-	int operator[](int i){ return at(i); }
-	std::vector<int> asVector() const;
+	__declspec(dllexport) LinkedList();
+	__declspec(dllexport) ~LinkedList();
+	__declspec(dllexport) void addNodeEnd(int value);
+	__declspec(dllexport) void addNodeBegin(int value);
+	__declspec(dllexport) void insertBefore(int index, int value);
+	__declspec(dllexport) int size() const;
+	__declspec(dllexport) void printList() const;
+	__declspec(dllexport) int at(int index) const;
+	__declspec(dllexport) int popHead();
+	__declspec(dllexport) void walk();
+	__declspec(dllexport) int popTail();
+	__declspec(dllexport) int popAt(int index);
+	__declspec(dllexport) int getSize() const;
+	__declspec(dllexport) int operator[](int i){ return at(i); }
+	__declspec(dllexport) std::vector<int> asVector() const;
 private:
 	Node *_listHead;                                                    // Where doos list start?
 	Node *_listTail;                                                    // Where does list end?
