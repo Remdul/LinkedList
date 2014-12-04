@@ -26,10 +26,13 @@ int _tmain(int argc, _TCHAR* argv[])
 	bool quitProgram = false; 
 	const int addtoList = 20;
 	std::vector<int>expectedValues;
+	std::cout << "Welcome to Bryan's Linker Program!" << std::endl;
+	std::cout << "Please Selection an option from the following Menu... " << std::endl;
+
+
 	while (quitProgram != true)
 	{
-		std::cout << "Welcome to Bryan's Linker Program!" << std::endl;
-		std::cout << "Please Selection an option from the following Menu... " << std::endl;
+		std::cout << std::endl;
 		std::cout << "------------------------------------------------------" << std::endl;
 		std::cout << "1) Print List" << std::endl;
 		std::cout << "2) Add Random Variables" << std::endl;
@@ -43,7 +46,9 @@ int _tmain(int argc, _TCHAR* argv[])
 		std::cout << "10) Get size" << std::endl;
 		std::cout << "11) Walk List (memtest)" << std::endl;
 		std::cout << "12) Print as Vector" << std::endl;
+		std::cout << "13) Print List Backwards" << std::endl;
 		std::cout << "0) Quit" << std::endl;
+		std::cout << "------------------------------------------------------" << std::endl << std::endl;
 		int answer;
 		int value;
 		int index;
@@ -115,6 +120,10 @@ int _tmain(int argc, _TCHAR* argv[])
 			{
 				std::cout << iter << std::endl;
 			}
+		}
+		else if (answer == 13)
+		{
+			listMain.reversePrintList();
 		}
 		else if (answer == 0)
 		{

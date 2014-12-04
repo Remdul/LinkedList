@@ -1,15 +1,9 @@
-// LinkerDll.cpp : Defines the exported functions for the DLL application.
-//
-
 #include "stdafx.h"
 #include <iostream>
 #include <string>
 #include <vector>
 #include <cstddef>
 #include "LinkerDll.h"
-
-//Implement Unit tests
-//Convert Doubly Linked List
 
 void LinkedList::walk()
 {
@@ -65,9 +59,45 @@ void LinkedList::printList() const
 		return;
 	}
 	std::cout << "LinkedList Contents: " << std::endl;
+	
+	int count = 0;
+	while (printNode != NULL) 
+	{
+		std::cout << count << " : " << printNode->_value << " > "<< std::endl;
+		if (printNode->_nextNode == NULL)
+		{
+			std::cout << "   nextNode = NULL" << std::endl;
+		}
+		else
+		{
+			std::cout << "   nextNode Value: " << printNode->_nextNode->_value << std::endl;
+		}
+		if (printNode->_prevNode == NULL)
+		{
+			std::cout << "   prevNode = NULL" << std::endl;
+		}
+		else
+		{
+			std::cout << "   prevNode Value: " << printNode->_prevNode->_value << std::endl;
+		}
+
+		count++;
+		printNode = printNode->_nextNode;
+	}
+}
+
+void LinkedList::reversePrintList() const
+{
+	Node *printNode = _listTail;
+	if (_listHead == NULL)
+	{
+		std::cout << "List is Empty. You Fail." << std::endl;
+		return;
+	}
+	std::cout << "LinkedList Contents: " << std::endl;
 	while (printNode != NULL) {
 		std::cout << printNode->_value << std::endl;
-		printNode = printNode->_nextNode;
+		printNode = printNode->_prevNode;
 	}
 }
 
@@ -84,6 +114,7 @@ void LinkedList::addNodeEnd(int value)
 	else
 	{
 		Node *newNode = new Node(value);
+		newNode->_prevNode = _listTail;
 		_size += 1;
 		Node *current = _listTail;
 		current->_nextNode = newNode;
@@ -106,6 +137,7 @@ void LinkedList::addNodeBegin(int value)
 		Node *newNode = new Node(value);
 		_size += 1;
 		newNode->_nextNode = _listHead;
+		_listHead->_prevNode = newNode;
 		_listHead = newNode;
 	}
 }
@@ -171,7 +203,10 @@ void LinkedList::insertBefore(int index, int value)
 		if (indexCounter == (index - 1))
 		{
 			insertNode->_nextNode = findNode->_nextNode;
+			findNode->_nextNode->_prevNode = insertNode;
+			insertNode->_prevNode = findNode;
 			findNode->_nextNode = insertNode;
+
 			_size += 1;
 			return;
 		}
@@ -203,6 +238,7 @@ int LinkedList::popHead()
 	delete _listHead;
 	_size -= 1;
 	_listHead = nextNode;
+	_listHead->_prevNode = NULL;
 	return poppedValue;
 }
 int LinkedList::popTail()
@@ -272,10 +308,10 @@ int LinkedList::popAt(int index)
 		{
 			Node *tempNode = findNode->_nextNode;
 			findNode->_nextNode = tempNode->_nextNode;
+			tempNode->_nextNode->_prevNode = findNode;
 			delete tempNode;
 			_size -= 1;
 			return -1;
-			//I think there should be a return here
 		}
 		findNode = findNode->_nextNode;
 		indexCounter += 1;

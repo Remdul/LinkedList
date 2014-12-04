@@ -7,12 +7,13 @@
 struct Node {
 	friend class LinkedList;
 public:
-	Node(void) :_nextNode(NULL){}                                        // Constructor NO value
-	Node(int value) :_value(value), _nextNode(NULL){}                    // Constructor with Value
-	Node(int value, Node* nextNode) :_value(value), _nextNode(nextNode){} // Constructor with Value and Next Point
+	Node(void) :_nextNode(NULL), _prevNode(NULL){}                                        // Constructor NO value
+	Node(int value) :_value(value), _nextNode(NULL), _prevNode(NULL){}                    // Constructor with Value
+	//	Node(int value, Node* nextNode) :_value(value), _nextNode(nextNode), _prevNode(NULL){} // Constructor with Value and Next Point
 private:
 	int _value;
 	Node *_nextNode;
+	Node *_prevNode;
 };
 
 class LinkedList
@@ -25,6 +26,7 @@ public:
 	__declspec(dllexport) void insertBefore(int index, int value);
 	__declspec(dllexport) int size() const;
 	__declspec(dllexport) void printList() const;
+	__declspec(dllexport) void reversePrintList() const;
 	__declspec(dllexport) int at(int index) const;
 	__declspec(dllexport) int popHead();
 	__declspec(dllexport) void walk();
