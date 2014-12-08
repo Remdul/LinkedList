@@ -43,7 +43,7 @@ public:
 private:
 	Node *_listHead;                                                    // Where doos list start?
 	Node *_listTail;                                                    // Where does list end?
-	int _size;
+	int _size = 0;
 };
 
 

@@ -189,15 +189,20 @@ int LinkedList::at(int index) const
 }
 void LinkedList::insertBefore(int index, int value)
 {
-	walk();
 	Node *findNode = _listHead;
-	Node *insertNode = new Node(value);
 	int indexCounter = 0;
 	if (_listHead == NULL || index == 0)
 	{
 		addNodeBegin(value);
 		return;
 	}
+	if (index >= size())
+	{
+		addNodeEnd(value);
+		return;
+	}
+	Node *insertNode = new Node(value);
+
 	while (_listTail != findNode)
 	{
 		if (indexCounter == (index - 1))
@@ -206,13 +211,15 @@ void LinkedList::insertBefore(int index, int value)
 			findNode->_nextNode->_prevNode = insertNode;
 			insertNode->_prevNode = findNode;
 			findNode->_nextNode = insertNode;
-
+			std::cout << "I get here1 " << std::endl;
 			_size += 1;
 			return;
 		}
 		findNode = findNode->_nextNode;
 		indexCounter += 1;
 	}
+	// Should Never Get here. Just in case...
+	delete insertNode;
 	addNodeEnd(value);
 	return;
 }
